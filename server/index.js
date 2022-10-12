@@ -10,10 +10,25 @@ mongoose.connect('mongodb+srv://seannarron9:dragon928@crud.4fkaje4.mongodb.net/f
     useNewUrlParser: true,
 })
 
-app.get("/", async (req, res) => {
+app.get("/read", async (req, res) => {
+
+    FoodModel.find({}, (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+
+        res.send(result)
+    })
+})
+
+app.get("/post", async (req, res) => {
+
+    const foodName = req.body.foodName
+    const days = req.body.days
+
     const food = new FoodModel({
-        foodName: 'apple', 
-        daySinceIAte: '3'
+        foodName: foodName, 
+        daySinceIAte: days
     });
     try{
         await food.save();

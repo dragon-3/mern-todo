@@ -17,6 +17,7 @@ app.get("/", async (req, res) => {
     });
     try{
         await food.save();
+        res.send("inserted data");
     } catch (err){
         console.log(err)
     }

@@ -1,14 +1,13 @@
 import { React, useEffect, useState } from "react";
 import "./Edit.css"
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function Edit() {
 
     const { id } = useParams();
     const url = `http://localhost:3001/`
     const [data, setData] = useState([])
-    // const [newFoodName, setNewFoodName] = useState('');
-    // const [newDay, setNewDay] = useState('');
+    const navigate = useNavigate();
 
     const [foodName, setFoodName] = useState('');
     const [day, setDay] = useState('');
@@ -42,6 +41,7 @@ function Edit() {
         .then((data) => {
             console.log(data)
         })
+        .then(navigate("/"))
     }
 
     return (

@@ -32,12 +32,14 @@ function Home() {
         .then((data) => {
             console.log(data)
         })
+        .then(window.location.reload());
     }
 
     const deleteData = (id) => {
         fetch(url + `delete/${id}`, {
             method: "DELETE"
         })
+        .then(window.location.reload());
         
     }
 

@@ -7,8 +7,8 @@ function Edit() {
     const { id } = useParams();
     const url = `http://localhost:3001/`
     const [data, setData] = useState([])
-    const [newFoodName, setNewFoodName] = useState('');
-    const [newDay, setNewDay] = useState('');
+    // const [newFoodName, setNewFoodName] = useState('');
+    // const [newDay, setNewDay] = useState('');
 
     const [foodName, setFoodName] = useState('');
     const [day, setDay] = useState('');
@@ -17,48 +17,49 @@ function Edit() {
     useEffect(() => {
         getData();
 
-    }, [])
+    }, [data[0]?._id])
 
     const getData = () => {
         fetch(url + `items/${id}`)
         .then((response) => response.json())
         .then((data) => 
             setData(data),
-            setFoodName(data.foodName),
-            setDay(data.daySinceIAte),
+            setFoodName(data[0]?.foodName),
+            setDay(data[0]?.daySinceIAte),
         )
     }
 
-    // const updateData = () => {
-    //     fetch(url + 'insert', {
-    //         method: "POST",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify({
-    //             foodName: foodName,
-    //             days: days
-    //         })
-    //     })
-    //     .then((data) => {
-    //         console.log(data)
-    //     })
-    // }
+    const updateData = (id) => {
+        fetch(url + 'update', {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                id: id,
+                foodName: foodName,
+                day: day
+            })
+        })
+        .then((data) => {
+            console.log(data)
+        })
+    }
 
     return (
         <div className="edit">
             <div className="form">
                 <label htmlFor="">New Food Name: </label>
-                <input type="text" name="newFoodName" value={foodName} onChange={(e) => {setNewFoodName(e.target.value)}}/>
+                <input type="text" name="foodName" value={foodName} onChange={(e) => setFoodName(e.target.value)}/>
 
                 <br />
 
                 <label htmlFor="">New Day: </label>
-                <input type="text" name="newDay" value={day} onChange={(e) => {setNewDay(e.target.value)}}/>
+                <input type="text" name="day" value={day} onChange={(e) => setDay(e.target.value)}/>
 
                 
             </div>
             <div className="add-button">
                 <br />
-                <button>UPDATE</button>
+                <button onClick={() => updateData(id)}>UPDATE</button>
             </div>
         </div>
     )

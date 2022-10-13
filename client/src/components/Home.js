@@ -34,6 +34,13 @@ function Home() {
         })
     }
 
+    const deleteData = (id) => {
+        fetch(url + `delete/${id}`, {
+            method: "DELETE"
+        })
+        
+    }
+
     return (
         <div className="home">
             <h1>MERN CRUD</h1>
@@ -50,7 +57,7 @@ function Home() {
                                 <td>{items.daySinceIAte}</td>
                                 <td>
                                     <Link to={`${items._id}`}><button>UPDATE</button></Link>
-                                    <button>DELETE</button>
+                                    <button onClick={() => deleteData(items._id)}>DELETE</button>
                                 </td>
                                 </tr>
                             )

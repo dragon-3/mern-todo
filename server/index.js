@@ -40,11 +40,11 @@ app.get("/items/:id", (req, res) => {
 app.post("/insert", (req, res) => {
 
     const foodName = req.body.foodName;
-    const days = req.body.days;
+    const day = req.body.days;
 
     const food = new FoodModel({
         foodName: foodName, 
-        daySinceIAte: days
+        daySinceIAte: day
     });
     try{
         food.save();
@@ -56,14 +56,14 @@ app.post("/insert", (req, res) => {
 
 app.put("/update", (req, res) => {
 
-    const newFoodName = req.body.newFoodName;
-    const newDays = req.body.newDays;
-    const id = req.body.id;
+    const foodName = req.body.foodName;
+    const day = req.body.day;
+    const id = req.params.id;
 
     try{
         FoodModel.findById(id, (err, updatedData) => {
-            updatedData.foodName = newFoodName;
-            updatedData.days = newDays;
+            updatedData.foodName = foodName;
+            updatedData.daySinceIAte = day;
             updatedData.save();
             res.send("Updated!")
 
@@ -73,6 +73,20 @@ app.put("/update", (req, res) => {
     } catch (err){
         console.log(err)
     }
+})
+
+app.delete("/delete/:id", (req, res) => {
+    const id = req.params.id
+
+    try {
+        FoodModel.findByIdAndRemove(id).exec();
+        res.send("Deleted!")
+
+    } catch (err) {
+        console.log(err)
+    }
+    
+
 })
 
 

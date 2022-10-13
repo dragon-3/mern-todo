@@ -8,7 +8,11 @@ const FoodSchema = new mongoose.Schema({
     daySinceIAte: {
         type: Number,
         required: true
-    }
+    },
+    // id: {
+    //     type: String,
+    //     required: true
+    // }
 
 })
 

@@ -1,0 +1,27 @@
+h1 {
+    margin: 100px;
+}
+
+table, th, tr, td {
+    margin: auto;
+    border-collapse: collapse;
+    border: solid grey;
+    border-width: thin;
+    width: 520px;
+    padding: 10px;
+}
+
+
+.table button {
+    margin: 3px;
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 20px;
+    background: lightblue;
+    font-size: 12px;
+}
+
+.add {
+    margin-top: 70px;
+}
